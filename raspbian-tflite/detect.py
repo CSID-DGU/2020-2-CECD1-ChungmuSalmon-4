@@ -5,7 +5,7 @@ import tensorflow as tf
 from core import utils
 from core.yolov4 import filter_boxes
 
-MODEL_PATH = './checkpoints/technonia-512.tflite'  # 모델 파일 경로
+MODEL_PATH = '/Users/cathfish/Documents/GraduatePJT/technonia-512-fp16.tflite'  # 모델 파일 경로
 IOU_THRESHOLD = 0.45
 SCORE_THRESHOLD = 0.25
 INPUT_SIZE = 512
@@ -46,10 +46,14 @@ def main(img_path):
 
     pred_bbox = [boxes.numpy(), scores.numpy(), classes.numpy(), valid_detections.numpy()]
     result = utils.draw_bbox(image, pred_bbox)
+    counts = utils.calc_object_number(pred_bbox)
+
+    # 서버 측으로 데이터 전송
+    utils.sent_to_server(counts)
 
     result = cv2.cvtColor(np.array(result), cv2.COLOR_RGB2BGR)
-    cv2.imshow("Result", result)
     cv2.imwrite('result.png', result)
+
 
 if __name__ == '__main__':
     img_path = './data/image2.JPG'
