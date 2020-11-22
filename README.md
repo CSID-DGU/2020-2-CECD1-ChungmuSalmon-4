@@ -14,6 +14,7 @@
   - [Tensorflow Lite](https://drive.google.com/file/d/1tgA0FMYOVpMepJ2jO-3NPaBVsYHj6cDD/view?usp=sharing)
   - [Tensorflow Lite - Float16 Quantized](https://drive.google.com/file/d/1tdkDEmYbzkZXn9Da39Qzj_sum3vNnju5/view?usp=sharing)
   - [Tensorflow Lite - Int8](https://drive.google.com/file/d/1tFeDfaE3RZLStduTwA3eE4_n4o2-0Kp4/view?usp=sharing)
+  - [Tensorflow Lite - Tiny](https://drive.google.com/file/d/1Gm7Ym1UhVHeGTSb5Pq1CMoDVojkWrwsS/view?usp=sharing)
 
 6. Locate the .tflite file you just downloaded in ./raspbian-tflite/checkpoints
 
