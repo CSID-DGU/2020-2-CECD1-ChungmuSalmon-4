@@ -11,7 +11,7 @@
 4. Now, you're all set!
 
 5. Download Pre-trained models
-  - [Tensorflow Lite](https://drive.google.com/file/d/1_hDxZM43nBrBMH3SSE10SEt0lJmQhAAd/view?usp=sharing)
+  - [Tensorflow Lite](https://drive.google.com/file/d/1-MRPjnDXBgN4OK7xGDdKmTTlnpu2IxTs/view?usp=sharing)
   - Tensorflow Lite - Float16 Quantized (Not Working)
   - [Tensorflow Lite - Int8](https://drive.google.com/file/d/1DeNK-CZMoqvfDhyayFjKbsId7xZH4GcE/view?usp=sharing)
   - [Tensorflow Lite - Tiny](https://drive.google.com/file/d/1Hm17rmmcDgLasHM8xhtv8rFCVL53L5Zu/view?usp=sharing)
