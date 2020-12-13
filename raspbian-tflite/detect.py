@@ -6,13 +6,14 @@ import tensorflow as tf
 from core import utils
 from core.yolov4 import filter_boxes, decode
 
-MODEL_PATH = './checkpoints/7600-float16.tflite'  # 모델 파일 경로
+MODEL_PATH = './checkpoints/7600-384-tiny.tflite'  # 모델 파일 경로
 IOU_THRESHOLD = 0.45
 SCORE_THRESHOLD = 0.25
 INPUT_SIZE = 384
 
 
 def main(img_path):
+    print("[1] Starting Object Detection...........")
     # STRIDES, ANCHORS, NUM_CLASS, XYSCALE = utils.load_config(FLAGS)
 
     start_time = time.time()  # 프로그램 실행 시작 시
@@ -28,6 +29,7 @@ def main(img_path):
         images_data.append(image_data)
     images_data = np.asarray(images_data).astype(np.float32)
 
+    print("[2] Loading Pre-trained Model..........." + MODEL_PATH[14:])
     interpreter = tf.lite.Interpreter(model_path=MODEL_PATH)
     interpreter.allocate_tensors()
     input_details = interpreter.get_input_details()
@@ -35,7 +37,7 @@ def main(img_path):
     interpreter.set_tensor(input_details[0]['index'], images_data)
     interpreter.invoke()
     pred = [interpreter.get_tensor(output_details[i]['index']) for i in range(len(output_details))]
-
+    
     boxes, pred_conf = filter_boxes(pred[0], pred[1], score_threshold=0.25, input_shape=tf.constant([INPUT_SIZE, INPUT_SIZE]))
 
     boxes, scores, classes, valid_detections = tf.image.combined_non_max_suppression(
@@ -52,18 +54,20 @@ def main(img_path):
     result = utils.draw_bbox(image, pred_bbox)
     counts = utils.calc_object_number(pred_bbox)
 
+    print("[3] Rendering Object Counting Result...........")
     print(counts)
     print("Time Taken (s): ", time.time() - start_time)
 
     # 서버 측으로 데이터 전송
+    print("[4] Sending Results to API Server...........")
     utils.sent_to_server(counts)
 
     result = cv2.cvtColor(np.array(result), cv2.COLOR_RGB2BGR)
-    cv2.imwrite('result.png', result)
+    cv2.imwrite('result(tiny).png', result)
 
 
 if __name__ == '__main__':
-    img_path = './data/image.JPG'
+    img_path = './data/image2.JPG'
     try:
         main(img_path)
     except SystemExit:

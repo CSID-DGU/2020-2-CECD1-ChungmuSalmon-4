@@ -63,6 +63,7 @@ def sent_to_server(counts):
         print('Failed to establish a new connection')
         return False
 
+    print("[5] Response from the API Server...........")
     print(response.json())
 
     return True

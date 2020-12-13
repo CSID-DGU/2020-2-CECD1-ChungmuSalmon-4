@@ -14,6 +14,8 @@ INPUT_SIZE = 384
 
 
 def main(img_path):
+    print("[1] Starting Object Detection...........")
+    
     """ core/config.py 설정 정보 로드 """
     STRIDES = np.array(cfg.YOLO.STRIDES)
     ANCHORS = utils.get_anchors(cfg.YOLO.ANCHORS)
@@ -32,7 +34,8 @@ def main(img_path):
     for i in range(1):
         images_data.append(image_data)
     images_data = np.asarray(images_data).astype(np.float32)
-
+    
+    print("[2] Loading Pre-trained Model..........." + MODEL_PATH[14:])
     interpreter = tf.lite.Interpreter(model_path=MODEL_PATH)
     interpreter.allocate_tensors()
     input_details = interpreter.get_input_details()
@@ -70,21 +73,23 @@ def main(img_path):
     )
 
     pred_bbox = [boxes.numpy(), scores.numpy(), classes.numpy(), valid_detections.numpy()]
-    # result = utils.draw_bbox(image, pred_bbox)
+    result = utils.draw_bbox(image, pred_bbox)
     counts = utils.calc_object_number(pred_bbox)
 
+    print("[3] Rendering Object Counting Result...........")
     print(counts)
     print("Time Taken (s): ", time.time() - start_time)
 
     # 서버 측으로 데이터 전송
+    print("[4] Sending Results to API Server...........")
     utils.sent_to_server(counts)
 
-    # result = cv2.cvtColor(np.array(result), cv2.COLOR_RGB2BGR)
-    # cv2.imwrite('result.png', result)
-
+    result = cv2.cvtColor(np.array(result), cv2.COLOR_RGB2BGR)
+    cv2.imwrite('result(int8).png', result)
+    
 
 if __name__ == '__main__':
-    img_path = './data/image.JPG'
+    img_path = './data/image2.JPG'
     try:
         main(img_path)
     except SystemExit:
