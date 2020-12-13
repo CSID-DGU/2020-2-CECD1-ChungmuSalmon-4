@@ -3,6 +3,7 @@ import random
 import colorsys
 import numpy as np
 import requests
+import json
 import datetime
 
 from core.config import cfg
@@ -32,7 +33,7 @@ def calc_object_number(bboxes):
 
 
 def sent_to_server(counts):
-    api_url = "http://localhost:3000/counts"
+    api_url = "http://ec2-52-79-163-193.ap-northeast-2.compute.amazonaws.com:3000/proto"
     now = datetime.datetime.now()
 
     person_count = counts.get('person') if counts.get('person') is not None else 0
@@ -47,13 +48,22 @@ def sent_to_server(counts):
 
     print(new_counting_result)
 
-    response = requests.post(
-        url=api_url,
-        data=new_counting_result
-    )
+    try:
+        response = requests.post(
+            url=api_url,
+            data=new_counting_result,
+            timeout=5
+        )
+    # Timeout
+    except requests.exceptions.ReadTimeout:
+        print('Timed Out')
+        return False
+    # Timeout
+    except requests.exceptions.ConnectionError:
+        print('Failed to establish a new connection')
+        return False
 
-    print(response)
-    print(response.text)
+    print(response.json())
 
     return True
 
@@ -96,3 +106,29 @@ def draw_bbox(image, bboxes, classes=read_class_names(cfg.YOLO.CLASSES), show_la
                         fontScale, (0, 0, 0), bbox_thick // 2, lineType=cv2.LINE_AA)
 
     return image
+
+
+def get_anchors(anchors_path, tiny=False):
+    anchors = np.array(anchors_path)
+    if tiny:
+        return anchors.reshape(2, 3, 2)
+    else:
+
+        return anchors.reshape(3, 3, 2)
+
+
+def load_config(FLAGS):
+    if FLAGS.tiny:
+        STRIDES = np.array(cfg.YOLO.STRIDES_TINY)
+        ANCHORS = get_anchors(cfg.YOLO.ANCHORS_TINY, FLAGS.tiny)
+        XYSCALE = cfg.YOLO.XYSCALE_TINY if FLAGS.model == 'yolov4' else [1, 1]
+    else:
+        STRIDES = np.array(cfg.YOLO.STRIDES)
+        if FLAGS.model == 'yolov4':
+            ANCHORS = get_anchors(cfg.YOLO.ANCHORS, FLAGS.tiny)
+        elif FLAGS.model == 'yolov3':
+            ANCHORS = get_anchors(cfg.YOLO.ANCHORS_V3, FLAGS.tiny)
+        XYSCALE = cfg.YOLO.XYSCALE if FLAGS.model == 'yolov4' else [1, 1, 1]
+    NUM_CLASS = len(read_class_names(cfg.YOLO.CLASSES))
+
+    return STRIDES, ANCHORS, NUM_CLASS, XYSCALE
