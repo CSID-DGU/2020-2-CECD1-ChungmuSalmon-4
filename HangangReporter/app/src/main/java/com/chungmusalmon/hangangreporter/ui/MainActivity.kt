@@ -15,6 +15,8 @@ import com.google.android.gms.maps.model.MarkerOptions
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import androidx.lifecycle.observe
 import com.chungmusalmon.hangangreporter.ui.adapter.SectionAdapter
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import java.lang.Exception
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), OnMapReadyCallback{
     override val layoutRes: Int = R.layout.activity_main
@@ -50,6 +52,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), OnMapRe
                     test = LatLng(section.longitude, section.latitude)
                     addMarker(
                         MarkerOptions()
+                            .icon(BitmapDescriptorFactory.defaultMarker(mapForMarker(section.congestion)))
                             .position(test)
                             .title(section.name)
                     )
@@ -64,5 +67,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), OnMapRe
         private const val defaultLat = 127.0
         val initLatLng = LatLng(defaultLng, defaultLat)
         const val zoomLevel = 15F
+        fun mapForMarker(congestion : Int) = when(congestion){
+                0 -> BitmapDescriptorFactory.HUE_GREEN
+                1 -> BitmapDescriptorFactory.HUE_YELLOW
+                2 -> BitmapDescriptorFactory.HUE_RED
+                else -> throw Exception()
+            }
+
     }
 }
