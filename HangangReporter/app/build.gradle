@@ -50,14 +50,11 @@ dependencies {
     implementation 'androidx.fragment:fragment-ktx:1.2.5'
 
     // retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.7.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.6.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.12.0'
 
-    // gson
-    implementation 'com.google.code.gson:gson:2.8.6'
-
-    // okhttp
-    implementation 'com.squareup.okhttp3:okhttp:4.9.0'
 
     // google maps api
     implementation 'com.google.android.gms:play-services-maps:17.0.0'

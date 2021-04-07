@@ -1,8 +1,7 @@
 package com.chungmusalmon.hangangreporter
 
 import android.app.Application
-import com.chungmusalmon.hangangreporter.di.useCaseModule
-import com.chungmusalmon.hangangreporter.di.viewModelModule
+import com.chungmusalmon.hangangreporter.di.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -15,7 +14,8 @@ class App : Application() {
             modules(
                 listOf(
                     viewModelModule,
-                    useCaseModule
+                    useCaseModule,
+                    repositoryModule
                 )
             )
         }
