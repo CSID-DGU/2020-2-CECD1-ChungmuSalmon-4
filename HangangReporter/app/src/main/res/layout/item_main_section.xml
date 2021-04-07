@@ -8,7 +8,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/item_height">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/tv_name"
@@ -16,10 +16,12 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_normal"
             android:textColor="@color/black"
+            android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginLeft="@dimen/margin_normal">
+            android:layout_marginLeft="@dimen/margin_normal"
+            >
 
         </TextView>
         
@@ -27,28 +29,16 @@
             android:id="@+id/tv_congestion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintRight_toLeftOf="@id/icon_detail"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginRight="@dimen/margin_normal"
-            android:textSize="@dimen/text_normal"
-            >
-
-        </TextView>
-
-        <TextView
-            android:id="@+id/icon_detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginRight="@dimen/margin_normal"
-            android:text="@string/ic_detail"
             android:textSize="@dimen/text_normal"
-            android:textColor="@color/black">
+            android:textStyle="bold"
+            >
 
         </TextView>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

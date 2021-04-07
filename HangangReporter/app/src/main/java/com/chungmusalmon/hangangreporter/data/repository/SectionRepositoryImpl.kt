@@ -7,7 +7,7 @@ import com.chungmusalmon.hangangreporter.domain.repository.SectionRepository
 
 class SectionRepositoryImpl : SectionRepository{
     override suspend fun getSectionList(): MutableList<SectionsResponse.Section> = RetrofitClient.getInstance().getSections().data.toMutableList()
-    override suspend fun getCongestion(id: String): Int = RetrofitClient.getInstance().getCongestion(id).congestion
+    override suspend fun getCongestion(id: String): Int = RetrofitClient.getInstance().getCongestion(id).congestionLevel
 
 }
 
