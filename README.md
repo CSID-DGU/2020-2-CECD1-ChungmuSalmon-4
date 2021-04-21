@@ -11,8 +11,11 @@
 4. Now, you're all set!
 
 5. Download Pre-trained models
-  - [Tensorflow Lite](https://drive.google.com/file/d/1tgA0FMYOVpMepJ2jO-3NPaBVsYHj6cDD/view?usp=sharing)
-  - [Tensorflow Lite - Float16 Quantized](https://drive.google.com/file/d/1tdkDEmYbzkZXn9Da39Qzj_sum3vNnju5/view?usp=sharing)
+  - [Latest Tensorflow Lite Model (512x512)](https://drive.google.com/file/d/1O5ZH0DLGjlAdByyeutGuuy81IMItSg58/view?usp=sharing)
+  - [Tensorflow Lite (Out-dated)](https://drive.google.com/file/d/1_hDxZM43nBrBMH3SSE10SEt0lJmQhAAd/view?usp=sharing)
+  - Tensorflow Lite - Float16 Quantized (Not Working)
+  - [Tensorflow Lite - Int8 (Out-dated)](https://drive.google.com/file/d/1DeNK-CZMoqvfDhyayFjKbsId7xZH4GcE/view?usp=sharing)
+  - [Tensorflow Lite - Tiny (Out-dated)](https://drive.google.com/file/d/1Hm17rmmcDgLasHM8xhtv8rFCVL53L5Zu/view?usp=sharing)
 
 6. Locate the .tflite file you just downloaded in ./raspbian-tflite/checkpoints
 

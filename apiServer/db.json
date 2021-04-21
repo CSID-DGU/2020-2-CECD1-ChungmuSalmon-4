@@ -1,0 +1,32 @@
+{
+  "counts": [
+    {
+      "time": "2020-11-20 00:33:34",
+      "location": "CampingZone",
+      "person": "0",
+      "tents": "14",
+      "id": 1
+    },
+    {
+      "time": "2020-11-20 00:38:50",
+      "location": "CampingZone",
+      "person": "0",
+      "tents": "14",
+      "id": 2
+    },
+    {
+      "time": "2020-11-20 00:38:57",
+      "location": "CampingZone",
+      "person": "0",
+      "tents": "14",
+      "id": 3
+    },
+    {
+      "time": "2020-11-20 00:39:09",
+      "location": "CampingZone",
+      "person": "0",
+      "tents": "14",
+      "id": 4
+    }
+  ]
+}
